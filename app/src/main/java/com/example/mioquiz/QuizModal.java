@@ -1,5 +1,6 @@
 package com.example.mioquiz;
 
+// Create class and set Variables
 public class QuizModal {
     private String question;
     private String option1;
@@ -8,6 +9,7 @@ public class QuizModal {
     private String option4;
     private String answer;
 
+    // Quiz functionality
     public QuizModal(String question, String option1, String option2, String option3, String option4, String answer) {
         this.question = question;
         this.option1 = option1;
@@ -17,6 +19,7 @@ public class QuizModal {
         this.answer = answer;
     }
 
+    // Create Constructor
     public String getQuestion() {
         return question;
     }

@@ -1,9 +1,8 @@
 package com.example.mioquiz;
 
+// Import Library's
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,16 +11,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Random;
 
-
+// Start MainActivity Class
 public class MainActivity extends AppCompatActivity {
 
+    // Create Variables
     private TextView questionTV, questionNumberTV, Info;
     private Button option1Btn, option2Btn, option3Btn, option4Btn, Login;
     private ArrayList<QuizModal> quizModalArrayList;
@@ -31,24 +28,29 @@ public class MainActivity extends AppCompatActivity {
     Random random;
     int currentScore = 0, questionAttempted = 1, currentPos;
 
+    // Intent activity_main XML
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+
+        // Assign Variables to Object in XML by ID
         questionTV = findViewById(R.id.idTVQuestion);
         questionNumberTV = findViewById(R.id.idTVQuestionAttempted);
         option1Btn = findViewById(R.id.idBtnOption1);
         option2Btn = findViewById(R.id.idBtnOption2);
         option3Btn = findViewById(R.id.idBtnOption3);
         option4Btn = findViewById(R.id.idBtnOption4);
+
+        // Create ArrayList quizModal
         quizModalArrayList = new ArrayList<>();
         random = new Random();
         getQuizQuestion(quizModalArrayList);
         currentPos = random.nextInt(quizModalArrayList.size());
         setDataToViews(currentPos);
 
+        // Function for Button 1
         option1Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Function for Button 2
         option2Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Function for Button 3
         option3Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Function for Button 4
         option4Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         
     }
 
+    // Function Profile Button (ImageButton)
     private void configureProfileButton() {
         ImageButton profileButton = (ImageButton) findViewById(R.id.profBtn);
         profileButton.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+    // Function for Bottom Sheet to view your Score
     private void showBottomSheet() {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(MainActivity.this);
         View bottomSheetView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.score_bottom_sheet, (LinearLayout) findViewById(R.id.idLLScore));
@@ -133,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         bottomSheetDialog.show();
     }
 
-
+    // ArrayList with the 10 Questions
     private void getQuizQuestion(ArrayList<QuizModal> quizModalArrayList) {
         quizModalArrayList.add(new QuizModal("How tall is the eiffel tower?", "100m", "200m", "300m", "500.", "300m"));
         quizModalArrayList.add(new QuizModal("How long is the chinese wall?", "21,196km", "32,399km", "10,000km", "8km", "21,196km"));
@@ -147,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
         quizModalArrayList.add(new QuizModal("Will you be a billionaire once?", "Yes", "No", "Never", "Please...", "Yes"));
     }
 
+    // Function Data to be shown in the bottom sheet
     private void setDataToViews(int currentPos) {
         questionNumberTV.setText("Questions Attempted : " + questionAttempted + "/10");
         if (questionAttempted == 10) {
